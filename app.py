@@ -15,6 +15,18 @@ os.system("playwright install")
 os.system("playwright install --with-deps chromium")
 os.system("playwright install-deps")
 
+# ======================= packages installation  ======================= #
+with open("packages.txt", "r") as file:
+    commands = file.readlines()
+
+for command in commands:
+    command = command.strip()
+    if command:
+        try:
+            subprocess.run(command, shell=True, check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Error executing command: {command}\n{e}")
+
 # ======================= streamlit setup  ======================= #
 st.title('WebGPT 1.0 🤖')
 
