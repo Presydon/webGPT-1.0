@@ -15,12 +15,6 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 os.system("playwright install")
 os.system("playwright install-deps")
 
-# ======================= launch browser  ======================= #
-async def launch_browser():
-    async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True)
-        await browser.close()
-    
 # ======================= streamlit setup  ======================= #
 st.title('WebGPT 1.0 🤖')
 
@@ -42,19 +36,15 @@ if run_scraper:
     try:
         st.write('Fetching and processing URLs... This may take a while..')
     
-        asyncio.run(launch_browser())
+        scraper = scraper(urls.split('\n'))
     
-        split_docs = asyncio.run(scraper(urls.split('\n')))
-    
-        # scraper = scraper(urls.split('\n'))
-    
-        # Run the async function safely
-        # try:
-        #     loop = asyncio.new_event_loop()
-        #     asyncio.set_event_loop(loop)
-        #     split_docs = loop.run_until_complete(scraper)
-        # finally:
-        #     loop.close()
+        Run the async function safely
+        try:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            split_docs = loop.run_until_complete(scraper)
+        finally:
+            loop.close()
     
         if not split_docs:
             st.error("No data extracted from the URLs.")
