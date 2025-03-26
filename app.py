@@ -16,16 +16,12 @@ os.system("playwright install --with-deps chromium")
 # os.system("playwright install-deps")
 
 # ======================= packages installation  ======================= #
-with open("packages.txt", "r") as file:
-    commands = file.readlines()
-
-for command in commands:
-    command = command.strip()
-    if command:
-        try:
-            subprocess.run(command, shell=True, check=True)
-        except Exception as e:
-            print(f"Error executing command: {command}\n{e}")
+try:
+    subprocess.run("sudo apt-get update", shell=True, check=True)
+    subprocess.run("sudo apt-get install -y $(cat packages.txt)", shell=True, check=True)
+    subprocess.run("npx playwright install-deps", shell=True, check=True)
+except Exception as e:
+    print(f'Failed to install dependencies: {e}')
 
 # ======================= streamlit setup  ======================= #
 st.title('WebGPT 1.0 🤖')
