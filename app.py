@@ -14,11 +14,11 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 os.system("playwright install")
 os.system("playwright install --with-deps chromium")
 
-with open("package.txt", "r") as file:
-    for line in file:
-        command = line.strip()
-        if command:
-            subprocess.run(command, shell=True, check=True)
+# with open("package.txt", "r") as file:
+#     for line in file:
+#         command = line.strip()
+#         if command:
+#             subprocess.run(command, shell=True, check=True)
 
 # ======================= streamlit setup  ======================= #
 st.title('WebGPT 1.0 🤖')
