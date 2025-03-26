@@ -24,7 +24,7 @@ for command in commands:
     if command:
         try:
             subprocess.run(command, shell=True, check=True)
-        except subprocess.CalledProcessError as e:
+        except Exception as e:
             print(f"Error executing command: {command}\n{e}")
 
 # ======================= streamlit setup  ======================= #
