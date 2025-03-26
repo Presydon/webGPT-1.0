@@ -46,26 +46,34 @@ if 'vector_store' not in st.session_state:
 
 # ======================= scrapper running  ======================= #
 if run_scraper:
-    st.write('Fetching and processing URLs... This may take a while..')
-
-    scraper = scraper(urls.split('\n'))  
-
-    # Run the async function safely
     try:
+        st.write('Fetching and processing URLs... This may take a while..')
+    
         asyncio.run(launch_browser())
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        split_docs = loop.run_until_complete(scraper)
-    finally:
-        loop.close()
+    
+        split_docs = asyncio.run(scraper(urls.split('\n')))
+    
+        # scraper = scraper(urls.split('\n'))
+    
+        # Run the async function safely
+        # try:
+        #     loop = asyncio.new_event_loop()
+        #     asyncio.set_event_loop(loop)
+        #     split_docs = loop.run_until_complete(scraper)
+        # finally:
+        #     loop.close()
+    
+        if not split_docs:
+            st.error("No data extracted from the URLs.")
+    
+        else:
+            st.session_state.vector_store = initialize(split_docs, reset=False)
+            st.session_state.scraping_done = True
+            st.success("Scraping and processing completed!") 
 
-    if not split_docs:
-        st.error("No data extracted from the URLs.")
-
-    else:
-        st.session_state.vector_store = initialize(split_docs, reset=False)
-        st.session_state.scraping_done = True
-        st.success("Scraping and processing completed!")
+    except Exception as e:
+        print(f'Error: {e}')
+    
 
 # ======================= clear button  ======================= #
 if st.button('Clear chat'):
