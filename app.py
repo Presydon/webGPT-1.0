@@ -1,7 +1,7 @@
 # ======================= libraries  ======================= #
 import os
 import sys
-# import subprocess
+import subprocess
 import asyncio
 import streamlit as st
 from src.scraper.scrap import scraper
