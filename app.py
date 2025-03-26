@@ -18,7 +18,7 @@ os.system("playwright install --with-deps chromium")
 
 # ======================= packages installation  ======================= #
 try:
-    subprocess.run('playwrigiht install', shell=True, check=True)
+    subprocess.run('playwright', 'install', '--with-deps', shell=True, check=True)
 except Exception as e:
     print(f"Playwright installation failed: {e}")
 
