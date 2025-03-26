@@ -14,16 +14,6 @@ os.environ["USER_AGENT"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Appl
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 os.system("playwright install")
 os.system("playwright install --with-deps chromium")
-# os.system("playwright install-deps")
-
-# ======================= packages installation  ======================= #
-try:
-    # subprocess.run('playwright', 'install', '--with-deps', shell=True, check=True)
-    subprocess.run(["apt-get", "update"], check=True)
-    subprocess.run(["apt-get", "install", "-y", "libnss3", "libatk1.0-0"], check=True)
-    subprocess.run(["playwright", "install", "--with-deps"], check=True)
-except Exception as e:
-    print(f"Playwright installation failed: {e}")
 
 # ======================= launch browser  ======================= #
 async def launch_browser():
