@@ -13,7 +13,7 @@ from src.functions.chatbot import process_query
 os.environ["USER_AGENT"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 os.system("playwright install")
-os.system("playwright install --with-deps chromium")
+os.system("playwright install-deps")
 
 # ======================= launch browser  ======================= #
 async def launch_browser():
