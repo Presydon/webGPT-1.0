@@ -1,6 +1,7 @@
 # ======================= libraries  ======================= #
 import os
 import sys
+import subprocess
 import asyncio
 import streamlit as st
 from src.scraper.scrap import scraper
@@ -12,6 +13,12 @@ os.environ["USER_AGENT"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Appl
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 os.system("playwright install")
 os.system("playwright install --with-deps chromium")
+
+with open("package.txt", "r") as file:
+    for line in file:
+        command = line.strip()
+        if command:
+            subprocess.run(command, shell=True, check=True)
 
 # ======================= streamlit setup  ======================= #
 st.title('WebGPT 1.0 🤖')
