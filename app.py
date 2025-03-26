@@ -3,6 +3,7 @@ import os
 import sys
 import subprocess
 import asyncio
+from playwright.async_api import async_playwright
 import streamlit as st
 from src.scraper.scrap import scraper
 from src.embeddings.vector_store import initialize
@@ -23,6 +24,12 @@ try:
 except Exception as e:
     print(f'Failed to install dependencies: {e}')
 
+# ======================= launch browser  ======================= #
+async def launch_browser():
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=True)
+        await browser.close()
+    
 # ======================= streamlit setup  ======================= #
 st.title('WebGPT 1.0 🤖')
 
@@ -47,6 +54,7 @@ if run_scraper:
 
     # Run the async function safely
     try:
+        asyncio.run(launch_browser())
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         split_docs = loop.run_until_complete(scraper)
