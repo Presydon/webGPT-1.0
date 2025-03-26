@@ -1,0 +1,9 @@
+.env
+/faiss_index
+/src/__pycache__
+/src/conversation/__pycache__
+/src/embeddings/__pycache__
+/src/functions/__pycache__
+/src/scraper/__pycache__
+/venv
+.DS_Store
