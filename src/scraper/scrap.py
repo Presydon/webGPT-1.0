@@ -9,7 +9,6 @@ async def scraper(urls):
     """
     
     """
-    await asyncio.sleep(2)
     loader = AsyncChromiumLoader(urls)
     text_transformer = Html2TextTransformer()
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=300)
