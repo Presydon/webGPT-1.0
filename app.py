@@ -18,11 +18,9 @@ os.system("playwright install --with-deps chromium")
 
 # ======================= packages installation  ======================= #
 try:
-    subprocess.run("sudo apt-get update", shell=True, check=True)
-    subprocess.run("sudo apt-get install -y $(cat package.txt)", shell=True, check=True)
-    subprocess.run("npx playwright install-deps", shell=True, check=True)
+    subprocess.run('playwrigiht install', shell=True, check=True)
 except Exception as e:
-    print(f'Failed to install dependencies: {e}')
+    print(f"Playwright installation failed: {e}")
 
 # ======================= launch browser  ======================= #
 async def launch_browser():
