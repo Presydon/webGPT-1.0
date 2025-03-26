@@ -13,7 +13,7 @@ os.environ["USER_AGENT"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Appl
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 os.system("playwright install")
 os.system("playwright install --with-deps chromium")
-os.system("playwright install-deps")
+# os.system("playwright install-deps")
 
 # ======================= packages installation  ======================= #
 with open("packages.txt", "r") as file:
